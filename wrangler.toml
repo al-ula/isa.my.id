@@ -1,0 +1,29 @@
+workers_dev = false
+name = "blog-rr"
+# compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2024-11-18"
+main = "./build/server/index.js"
+assets = { directory = "./build/client/" }
+
+[vars]
+VALUE_FROM_CLOUDFLARE = "Hello from Cloudflare"
+
+[env.staging]
+routes = [
+    { pattern = "staging.isa.my.id", custom_domain = true },
+]
+[env.staging.vars]
+VALUE_FROM_CLOUDFLARE = "Hello from Cloudflare"
+
+[env.production]
+routes = [
+    { pattern = "isa.my.id", custom_domain = true },
+]
+[env.production.vars]
+VALUE_FROM_CLOUDFLARE = "Hello from Cloudflare"
+COOKIE_SECURE = "true"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "prod-isamyid"
+# database_id = "8eb0c9e6-97b4-4150-b3d1-6da086b57db5"

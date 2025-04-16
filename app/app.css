@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@theme {
+  --font-serif: "Source Code Pro", ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+}
+
+html,
+body {
+  font-family: var(--font-serif);
+}
+
+/* Base prose container */
+.prose {
+  @apply text-base-content max-w-3xl leading-relaxed px-4 text-sm  md:text-base;
+}
+
+/* Headings */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-bold leading-tight mt-8 mb-2;
+}
+
+.prose h1 {
+  @apply text-3xl md:text-4xl;
+}
+.prose h2 {
+  @apply text-2xl md:text-3xl;
+}
+.prose h3 {
+  @apply text-xl md:text-2xl;
+}
+.prose h4 {
+  @apply text-lg md:text-xl;
+}
+.prose h5 {
+  @apply text-base md:text-lg;
+}
+.prose h6 {
+  @apply text-sm md:text-base;
+}
+
+/* Paragraphs */
+.prose p {
+  @apply my-4;
+}
+
+/* Links */
+.prose a {
+  @apply text-base-content underline transition-colors duration-150 ease-in-out;
+}
+
+.prose a:hover {
+  @apply text-base-content/70;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  @apply my-6 pl-4 border-l-4 border-base-300 italic text-neutral;
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  @apply my-4 ml-6;
+}
+
+.prose li {
+  @apply my-2;
+}
+
+/* Inline code */
+.prose code {
+  @apply bg-base-200 text-error px-1 py-0.5 rounded text-sm;
+}
+
+/* Preformatted blocks */
+.prose pre {
+  @apply bg-neutral text-neutral-content p-4 overflow-x-auto rounded-lg my-4;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 rounded-none;
+}
+
+/* Horizontal rules */
+.prose hr {
+  @apply border-t border-base-300 my-8;
+}
+
+/* Tables */
+.prose table {
+  @apply w-full table-auto text-left my-4;
+}
+
+.prose th,
+.prose td {
+  @apply p-2 border-b border-base-300;
+}
+
+/* Images */
+.prose img {
+  @apply max-w-full rounded-lg my-4 mx-auto;
+}
+
+/* Figures */
+.prose figure {
+  @apply my-4 mx-auto;
+}
+.prose figcaption {
+  @apply text-sm italic text-center text-base-content;
+}

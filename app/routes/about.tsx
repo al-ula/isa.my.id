@@ -1,4 +1,12 @@
 import { useState, useEffect } from "react";
+import type { Route } from "./+types/about";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "About Isa Al Ula's" },
+    { name: "description", content: "About Isa Al Ula's Personal Website" },
+  ];
+}
 
 export default function About() {
   return (

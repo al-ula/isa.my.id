@@ -27,3 +27,7 @@ COOKIE_SECURE = "true"
 # binding = "DB"
 # database_name = "prod-isamyid"
 # database_id = "8eb0c9e6-97b4-4150-b3d1-6da086b57db5"
+
+[observability]
+enabled = true
+head_sampling_rate = 1 # optional. default = 1.

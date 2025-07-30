@@ -9,19 +9,16 @@ export default function Nav({
   isLoggedIn: boolean;
 }) {
   const [isNavOpen, setNavOpen] = useState(false);
-  // Specify the type for the ref to an HTMLElement (or null initially)
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Explicitly type the event as React.FocusEvent<HTMLDivElement>
   const handleDropdownFocus = (event: React.FocusEvent<HTMLDivElement>) => {
     setNavOpen(true);
   };
 
-  // Explicitly type the event as React.FocusEvent<HTMLDivElement | HTMLUListElement>
   const handleDropdownBlur = (
     event: React.FocusEvent<HTMLDivElement | HTMLUListElement>
   ) => {
-    // Ensure dropdownRef.current is not null before using it
+
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.relatedTarget as Node)
@@ -30,10 +27,9 @@ export default function Nav({
     }
   };
 
-  // Explicitly type the event as MouseEvent
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Ensure dropdownRef.current is not null before using it
+  
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -48,7 +44,7 @@ export default function Nav({
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
-    // Cleanup the event listener when the component unmounts or isNavOpen changes
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -107,14 +103,13 @@ export default function Nav({
             </div>
             <ul
               tabIndex={0}
-              className="z-1 bg-base-200 shadow-sm mt-4 p-2 rounded-box w-52 menu dropdown-content"
+              className="z-1 bg-base-200 shadow-sm mt-4 p-2 rounded-box w-48 menu dropdown-content"
               onBlur={handleDropdownBlur}
             >
               <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Item 2</a>
+                <a className="btn btn-ghost" href="/about">
+                  About
+                </a>
               </li>
             </ul>
           </div>

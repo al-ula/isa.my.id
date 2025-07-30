@@ -1,16 +1,63 @@
 import Logout from "./logout";
-import {useState} from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Nav({
-                              title, isLoggedIn,
-                            }: {
-  title: string; isLoggedIn: boolean;
+  title,
+  isLoggedIn,
+}: {
+  title: string;
+  isLoggedIn: boolean;
 }) {
   const [isNavOpen, setNavOpen] = useState(false);
+  // Specify the type for the ref to an HTMLElement (or null initially)
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Explicitly type the event as React.FocusEvent<HTMLDivElement>
+  const handleDropdownFocus = (event: React.FocusEvent<HTMLDivElement>) => {
+    setNavOpen(true);
+  };
+
+  // Explicitly type the event as React.FocusEvent<HTMLDivElement | HTMLUListElement>
+  const handleDropdownBlur = (
+    event: React.FocusEvent<HTMLDivElement | HTMLUListElement>
+  ) => {
+    // Ensure dropdownRef.current is not null before using it
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.relatedTarget as Node)
+    ) {
+      setNavOpen(false);
+    }
+  };
+
+  // Explicitly type the event as MouseEvent
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Ensure dropdownRef.current is not null before using it
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setNavOpen(false);
+      }
+    };
+
+    if (isNavOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    // Cleanup the event listener when the component unmounts or isNavOpen changes
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isNavOpen]);
+
   return (
     <nav className="bg-base-300 shadow-sm navbar">
       <div className="navbar-start">
-        <label
+        {/* <label
           htmlFor="my-drawer-2"
           className="lg:hidden m-0 px-1 btn btn-ghost drawer-button"
         >
@@ -31,11 +78,10 @@ export default function Nav({
               <path
                 d="M6.5 11.75C6.08579 11.75 5.75 12.0858 5.75 12.5C5.75 12.9142 6.08579 13.25 6.5 13.25V11.75ZM18.5 13.25C18.9142 13.25 19.25 12.9142 19.25 12.5C19.25 12.0858 18.9142 11.75 18.5 11.75V13.25ZM6.5 15.75C6.08579 15.75 5.75 16.0858 5.75 16.5C5.75 16.9142 6.08579 17.25 6.5 17.25V15.75ZM18.5 17.25C18.9142 17.25 19.25 16.9142 19.25 16.5C19.25 16.0858 18.9142 15.75 18.5 15.75V17.25ZM6.5 7.75C6.08579 7.75 5.75 8.08579 5.75 8.5C5.75 8.91421 6.08579 9.25 6.5 9.25V7.75ZM18.5 9.25C18.9142 9.25 19.25 8.91421 19.25 8.5C19.25 8.08579 18.9142 7.75 18.5 7.75V9.25ZM6.5 13.25H18.5V11.75H6.5V13.25ZM6.5 17.25H18.5V15.75H6.5V17.25ZM6.5 9.25H18.5V7.75H6.5V9.25Z"
                 fill="currentColor"
-              ></path>
-              {" "}
+              ></path>{" "}
             </g>
           </svg>
-        </label>
+        </label> */}
         <a className="text-xl btn btn-ghost" href="/">
           {title}
         </a>
@@ -47,14 +93,36 @@ export default function Nav({
             About
           </a>
         </div>
-        <div className={"md:hidden"}>
-          <button className={"btn btn-ghost"} onClick={()=> setNavOpen(!isNavOpen)}>
-            <ChevronRight isOpen={isNavOpen}/>
-          </button>
+        <div className={"md:hidden"} ref={dropdownRef}>
+          <div className="dropdown-bottom dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="m-1 btn btn-ghost"
+              onFocus={handleDropdownFocus}
+              onBlur={handleDropdownBlur}
+              onClick={() => setNavOpen(!isNavOpen)}
+            >
+              <ChevronRight isOpen={isNavOpen} />
+            </div>
+            <ul
+              tabIndex={0}
+              className="z-1 bg-base-200 shadow-sm mt-4 p-2 rounded-box w-52 menu dropdown-content"
+              onBlur={handleDropdownBlur}
+            >
+              <li>
+                <a>Item 1</a>
+              </li>
+              <li>
+                <a>Item 2</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        {isLoggedIn && <Logout/>}
+        {isLoggedIn && <Logout />}
       </div>
-    </nav>);
+    </nav>
+  );
 }
 
 function ChevronRight({ isOpen }: { isOpen: boolean }) {
@@ -69,7 +137,9 @@ function ChevronRight({ isOpen }: { isOpen: boolean }) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`lucide lucide-chevron-right transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
+      className={`lucide lucide-chevron-right transition-transform duration-300 ${
+        isOpen ? "rotate-90" : ""
+      }`}
     >
       <path d="m9 18 6-6-6-6" />
     </svg>

@@ -17,6 +17,9 @@ export default function Home() {
         <ul>
           <li><a href="https://github.com/al-ula/small_uid">SmallUID</a>: A multi-language library for generating url safe unique IDs for all js runtime and rust.</li>
         </ul>
+        <ul>
+          <li><a href="https://pasted.my.id">Pasted</a>: A simple and secure pastebin for sharing code snippets.</li>
+        </ul>
       </section>
 
     </article>

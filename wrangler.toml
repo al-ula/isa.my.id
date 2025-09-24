@@ -22,6 +22,9 @@ routes = [
 [env.production.vars]
 VALUE_FROM_CLOUDFLARE = "Hello from Cloudflare"
 COOKIE_SECURE = "true"
+# wrangler.toml (wrangler v3.88.0^)
+[env.production.observability.logs]
+enabled = true
 
 # [[d1_databases]]
 # binding = "DB"

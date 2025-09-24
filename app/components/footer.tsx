@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="items-center bg-base-300 p-4 text-base-content footer sm:footer-horizontal">
+    <footer className="items-center bg-base-300 p-4 h-fit text-base-content footer sm:footer-horizontal">
       <aside className="items-center grid-flow-col">
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>

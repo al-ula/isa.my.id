@@ -68,10 +68,12 @@ export default function App({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <Nav title="Isa Al Ula" isLoggedIn={loaderData} />
-      <div className="flex-grow">
-        <Outlet />
+      <div className="flex flex-col h-full overflow-y-auto">
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

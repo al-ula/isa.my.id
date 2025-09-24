@@ -51,7 +51,7 @@ export default function Nav({
   }, [isNavOpen]);
 
   return (
-    <nav className="bg-base-300 shadow-sm navbar">
+    <nav className="bg-base-300 shadow-sm h-fit navbar">
       <div className="navbar-start">
         {/* <label
           htmlFor="my-drawer-2"
@@ -78,9 +78,11 @@ export default function Nav({
             </g>
           </svg>
         </label> */}
-        <a className="text-xl btn btn-ghost" href="/">
-          {title}
-        </a>
+        <h1>
+          <a className="text-xl btn btn-ghost" href="/">
+            {title}
+          </a>
+        </h1>
       </div>
       <div className="navbar-center"></div>
       <div className="navbar-end">

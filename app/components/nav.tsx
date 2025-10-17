@@ -96,6 +96,7 @@ export default function Nav({
             <div
               tabIndex={0}
               role="button"
+              aria-label="Nav links opener"
               className="m-1 btn btn-ghost"
               onFocus={handleDropdownFocus}
               onBlur={handleDropdownBlur}

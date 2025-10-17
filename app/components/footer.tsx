@@ -5,7 +5,7 @@ export default function Footer() {
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
       <nav className="md:justify-self-end md:place-self-center gap-4 grid-flow-col">
-        <a href="https://bsky.app/profile/did:plc:kexl67fk3q4ycjnigmjyhlmy">
+        <a href="https://bsky.app/profile/did:plc:kexl67fk3q4ycjnigmjyhlmy" aria-label="Author's bluesky page">
           <svg
             fill="none"
             viewBox="0 0 64 57"

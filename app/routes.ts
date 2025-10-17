@@ -16,4 +16,8 @@ export default [
     route("login", "routes/admin/login.tsx"),
     route("logout", "routes/admin/logout.tsx"),
   ]),
+  ...prefix("blog", [
+    index("routes/blog/index.tsx"),
+    route(":slug", "routes/blog/blog.tsx"),
+  ])
 ] satisfies RouteConfig;

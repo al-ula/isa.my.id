@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { reactRouterHonoServer } from "react-router-hono-server/dev";
 import { cloudflareDevProxy } from "@react-router/dev/vite/cloudflare";
+import mdx from '@mdx-js/rollup'
 
 export default defineConfig(({ isSsrBuild }) => {
   return {
@@ -12,6 +13,7 @@ export default defineConfig(({ isSsrBuild }) => {
       reactRouterHonoServer({
         runtime: "cloudflare"
       }),
+      mdx(),
       reactRouter(),
       tailwindcss(),
       tsconfigPaths()

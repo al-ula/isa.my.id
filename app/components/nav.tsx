@@ -1,12 +1,9 @@
-import Logout from "./logout";
 import { useState, useEffect, useRef } from "react";
 
 export default function Nav({
   title,
-  isLoggedIn,
 }: {
   title: string;
-  isLoggedIn: boolean;
 }) {
   const [isNavOpen, setNavOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -117,7 +114,6 @@ export default function Nav({
             </ul>
           </div>
         </div>
-        {isLoggedIn && <Logout />}
       </div>
     </nav>
   );

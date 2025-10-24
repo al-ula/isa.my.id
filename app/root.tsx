@@ -12,7 +12,6 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
-import { verify } from "./auth/auth";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -44,30 +43,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
-export async function loader({ request, context }: Route.LoaderArgs) {
-  const cookie = request.headers.get("Cookie");
-  const authCookie = createCookie("auth");
-  const authLoad = await authCookie.parse(cookie);
-  if (authLoad === null) {
-    return false;
-  }
-  const authValuePromise = verify(
-    authLoad,
-    context.cloudflare.env.SECRET,
-    "admin"
-  );
-  try {
-    await authValuePromise;
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
 
-export default function App({ loaderData }: Route.ComponentProps) {
+export default function App() {
   return (
     <>
-      <Nav title="Isa Al Ula" isLoggedIn={loaderData} />
+      <Nav title="Isa Al Ula"/>
       <div className="flex flex-col h-full overflow-y-auto">
         <div className="flex-grow">
           <Outlet />
@@ -96,7 +76,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <>
-      <Nav title="Isa Al Ula" isLoggedIn={false} />
+      <Nav title="Isa Al Ula"/>
       <main className="flex-grow mx-auto p-4 pt-16 container">
         <h1>{message}</h1>
         <p>{details}</p>

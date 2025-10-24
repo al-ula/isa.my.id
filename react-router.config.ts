@@ -27,6 +27,6 @@ export default {
       (_, i) => i === 0 ? "/" : `/?page=${i + 1}`
     );
 
-    return [...indexPaginationPaths,...paginationPaths, ...blogPaths];
+    return [...indexPaginationPaths,...paginationPaths, ...blogPaths, "/about"];
   },
 } satisfies Config;

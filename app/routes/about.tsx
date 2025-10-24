@@ -32,6 +32,7 @@ export default function About() {
           </figcaption>
         </figure>
         <figure>
+          <ReactRouterLogo />
           <figcaption>
             <a href="https://reactrouter.com/">React Router</a>
           </figcaption>
